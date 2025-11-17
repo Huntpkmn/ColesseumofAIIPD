@@ -1,0 +1,176 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4jci160uf5jg"]
+
+[ext_resource type="Texture2D" uid="uid://dnlnhp2aads8f" path="res://assets/table.svg" id="1_gueg4"]
+[ext_resource type="Script" uid="uid://cg7pcx13t4ly6" path="res://src/baselevel.gd" id="1_wijdo"]
+[ext_resource type="FontFile" uid="uid://bb4oqfclkas0t" path="res://assets/Xirod.otf" id="3_1emm4"]
+[ext_resource type="Script" uid="uid://df8bm13a4yp36" path="res://src/ui.gd" id="3_58ipc"]
+[ext_resource type="Theme" uid="uid://n45jogdf8j1u" path="res://src/player.tres" id="4_1emm4"]
+
+[sub_resource type="Theme" id="Theme_31dkl"]
+default_font = ExtResource("3_1emm4")
+default_font_size = 32
+
+[node name="BasicScene" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_wijdo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.8, 0.74509805, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Table" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(577, 317)
+
+[node name="Table" type="Sprite2D" parent="Table"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_gueg4")
+
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" type="Control" parent="PlayerUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="PlayerUI/PlayerUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -131.0
+offset_right = 96.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 314)
+
+[node name="OverallScore" type="CanvasLayer" parent="."]
+layer = 3
+follow_viewport_enabled = true
+
+[node name="Scoreboard" type="Control" parent="OverallScore"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="OverallScore/Scoreboard"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -243.0
+offset_bottom = 385.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverallScore/Scoreboard/PanelContainer"]
+layout_mode = 2
+
+[node name="Score" type="MarginContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="PanelContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score"]
+layout_mode = 2
+theme = SubResource("Theme_31dkl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score/Score"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score/Score/VBoxContainer"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score/Score/VBoxContainer"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score2" type="MarginContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="PanelContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2"]
+layout_mode = 2
+theme = SubResource("Theme_31dkl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2/Score"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2/Score/VBoxContainer"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2/Score/VBoxContainer"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="UI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_58ipc")
+metadata/_edit_use_anchors_ = true
+
+[node name="Round" type="Label" parent="UI/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -131.0
+offset_right = 131.0
+offset_bottom = 74.0
+grow_horizontal = 2
+theme = ExtResource("4_1emm4")
+text = "Round"
+
+[node name="Counter" type="Label" parent="UI/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -131.0
+offset_top = 65.0
+offset_right = 131.0
+offset_bottom = 139.0
+grow_horizontal = 2
+theme = ExtResource("4_1emm4")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PlayerUI/PlayerUI/Start" to="." method="_on_start_pressed"]
