@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmau8yprl87bw"]
+
+[ext_resource type="Script" uid="uid://c4bvv7g61i8lj" path="res://src/player.gd" id="1_bktlc"]
+[ext_resource type="Texture2D" uid="uid://c3mmxwud5pw1q" path="res://assets/character.svg" id="1_gmfve"]
+[ext_resource type="Texture2D" uid="uid://b5pfwdym26avy" path="res://icon.svg" id="2_ehvfd"]
+[ext_resource type="Theme" uid="uid://n45jogdf8j1u" path="res://src/player.tres" id="3_bktlc"]
+
+[sub_resource type="Gradient" id="Gradient_pg28d"]
+colors = PackedColorArray(1, 0.8901961, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_21lrq"]
+gradient = SubResource("Gradient_pg28d")
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_bktlc")
+
+[node name="Character" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_gmfve")
+
+[node name="ColorBox" type="TextureRect" parent="Character"]
+show_behind_parent = true
+offset_left = -124.0
+offset_top = 242.0
+offset_right = 132.0
+offset_bottom = 491.5658
+rotation = -1.5707964
+texture = SubResource("GradientTexture1D_21lrq")
+
+[node name="Label" type="Label" parent="Character"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -615.0
+offset_top = -769.5
+offset_right = -292.0
+offset_bottom = -695.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_bktlc")
+text = "Random"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Character"]
+anchors_preset = -1
+anchor_left = 0.35005513
+anchor_top = 0.26405734
+anchor_right = 0.6510474
+anchor_bottom = 0.52866596
+offset_left = -453.5
+offset_top = -453.5
+offset_right = -453.5
+offset_bottom = -453.50003
+texture = ExtResource("2_ehvfd")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="numbering" type="Label" parent="Character"]
+anchors_preset = -1
+anchor_left = 0.47133407
+anchor_top = 0.592613
+anchor_right = 0.5275634
+anchor_bottom = 0.67420065
+offset_left = -453.5
+offset_top = -453.5
+offset_right = -453.5
+offset_bottom = -453.5
+theme = ExtResource("3_bktlc")
+text = "0"
+metadata/_edit_use_anchors_ = true
