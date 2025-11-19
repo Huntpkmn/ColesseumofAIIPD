@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnxsqg3opkv35"]
+
+[ext_resource type="FontFile" uid="uid://bb4oqfclkas0t" path="res://assets/Xirod.otf" id="1_8tr4k"]
+[ext_resource type="Script" uid="uid://b5vxniqjve1nf" path="res://src/score_ai.gd" id="1_vxpch"]
+
+[sub_resource type="Theme" id="Theme_31dkl"]
+default_font = ExtResource("1_8tr4k")
+default_font_size = 32
+
+[node name="Score" type="MarginContainer"]
+script = ExtResource("1_vxpch")
+
+[node name="Score" type="PanelContainer" parent="."]
+layout_mode = 2
+theme = SubResource("Theme_31dkl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Score"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Score/VBoxContainer"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Score/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
