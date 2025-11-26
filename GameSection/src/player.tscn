@@ -6,9 +6,11 @@
 [ext_resource type="Theme" uid="uid://n45jogdf8j1u" path="res://src/player.tres" id="3_bktlc"]
 
 [sub_resource type="Gradient" id="Gradient_pg28d"]
+resource_local_to_scene = true
 colors = PackedColorArray(1, 0.8901961, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_21lrq"]
+resource_local_to_scene = true
 gradient = SubResource("Gradient_pg28d")
 
 [node name="Player" type="Node2D"]
@@ -17,6 +19,15 @@ script = ExtResource("1_bktlc")
 [node name="Character" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_gmfve")
+
+[node name="Decision" type="ColorRect" parent="Character"]
+visible = false
+show_behind_parent = true
+offset_left = -210.0
+offset_top = -240.0
+offset_right = 210.0
+offset_bottom = 42.0
+color = Color(1.2003537, 0.12104194, 0, 0.5411765)
 
 [node name="ColorBox" type="TextureRect" parent="Character"]
 show_behind_parent = true

@@ -1,16 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4jci160uf5jg"]
+[gd_scene load_steps=5 format=3 uid="uid://b4jci160uf5jg"]
 
 [ext_resource type="Texture2D" uid="uid://dnlnhp2aads8f" path="res://assets/table.svg" id="1_gueg4"]
 [ext_resource type="Script" uid="uid://cg7pcx13t4ly6" path="res://src/baselevel.gd" id="1_wijdo"]
-[ext_resource type="FontFile" uid="uid://bb4oqfclkas0t" path="res://assets/Xirod.otf" id="3_1emm4"]
 [ext_resource type="Script" uid="uid://df8bm13a4yp36" path="res://src/ui.gd" id="3_58ipc"]
 [ext_resource type="Theme" uid="uid://n45jogdf8j1u" path="res://src/player.tres" id="4_1emm4"]
 
-[sub_resource type="Theme" id="Theme_31dkl"]
-default_font = ExtResource("3_1emm4")
-default_font_size = 32
-
-[node name="BasicScene" type="Node2D"]
+[node name="BasicScene" type="Node2D" groups=["main"]]
 y_sort_enabled = true
 script = ExtResource("1_wijdo")
 
@@ -34,7 +29,25 @@ position = Vector2(577, 317)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_gueg4")
 
+[node name="TargetPlayer" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Target" type="ColorRect" parent="TargetPlayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.5
+offset_top = -133.5
+offset_right = 107.5
+offset_bottom = 133.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28235295, 1, 1, 0.5529412)
+
 [node name="PlayerUI" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="PlayerUI" type="Control" parent="PlayerUI"]
 layout_mode = 3
@@ -59,12 +72,42 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Start"
 
+[node name="Cooperate" type="Button" parent="PlayerUI/PlayerUI"]
+visible = false
+layout_mode = 0
+anchor_left = 0.5911458
+anchor_top = 0.80401236
+anchor_right = 0.7213542
+anchor_bottom = 0.9259259
+text = "Cooperate"
+metadata/_edit_use_anchors_ = true
+
+[node name="Defect" type="Button" parent="PlayerUI/PlayerUI"]
+visible = false
+layout_mode = 0
+anchor_left = 0.2751736
+anchor_top = 0.8055556
+anchor_right = 0.40625
+anchor_bottom = 0.9243827
+text = "Defect"
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="PlayerUI/PlayerUI"]
+visible = false
+layout_mode = 0
+offset_left = 469.0
+offset_top = 539.0
+offset_right = 684.0
+offset_bottom = 586.0
+placeholder_text = "Enter Name"
+alignment = 1
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 314)
+zoom = Vector2(0.6, 0.6)
 
-[node name="OverallScore" type="CanvasLayer" parent="."]
+[node name="OverallScore" type="CanvasLayer" parent="." groups=["ScoreUI"]]
 layer = 3
-follow_viewport_enabled = true
 
 [node name="Scoreboard" type="Control" parent="OverallScore"]
 layout_mode = 3
@@ -73,7 +116,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="OverallScore/Scoreboard"]
 layout_mode = 1
@@ -87,55 +130,7 @@ grow_horizontal = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="OverallScore/Scoreboard/PanelContainer"]
 layout_mode = 2
 
-[node name="Score" type="MarginContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Score" type="PanelContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score"]
-layout_mode = 2
-theme = SubResource("Theme_31dkl")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score/Score"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score/Score/VBoxContainer"]
-layout_mode = 2
-text = "Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Score" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score/Score/VBoxContainer"]
-layout_mode = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Score2" type="MarginContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Score" type="PanelContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2"]
-layout_mode = 2
-theme = SubResource("Theme_31dkl")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2/Score"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2/Score/VBoxContainer"]
-layout_mode = 2
-text = "Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Score" type="Label" parent="OverallScore/Scoreboard/PanelContainer/VBoxContainer/Score2/Score/VBoxContainer"]
-layout_mode = 2
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UI" type="CanvasLayer" parent="."]
-layer = 2
-follow_viewport_enabled = true
-
-[node name="UI" type="Control" parent="UI"]
+[node name="UI" type="Control" parent="OverallScore"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,7 +141,7 @@ mouse_filter = 2
 script = ExtResource("3_58ipc")
 metadata/_edit_use_anchors_ = true
 
-[node name="Round" type="Label" parent="UI/UI"]
+[node name="Round" type="Label" parent="OverallScore/UI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -158,7 +153,7 @@ grow_horizontal = 2
 theme = ExtResource("4_1emm4")
 text = "Round"
 
-[node name="Counter" type="Label" parent="UI/UI"]
+[node name="Counter" type="Label" parent="OverallScore/UI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -174,3 +169,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="PlayerUI/PlayerUI/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="PlayerUI/PlayerUI/Cooperate" to="." method="_on_cooperate_pressed"]
+[connection signal="pressed" from="PlayerUI/PlayerUI/Defect" to="." method="_on_defect_pressed"]
+[connection signal="text_submitted" from="PlayerUI/PlayerUI/LineEdit" to="." method="_on_line_edit_text_submitted"]
