@@ -87,6 +87,18 @@ class TwoPersonProblem(AbstractProblem):
         output += f"Both Cooperate Cost: {self._dual_coop_r}\n"
         output += f"Single defect cost: {self._condemn_r}\n"
 
+        # Record information about the players.
+        output += "#####\n"
+        output += f"A: {self._pa._name}\n"
+        output += f"B: {self._pb._name}\n"
+
+        temp = (self._pa._name, self._pb._name)
+        final_scores = list(x[-1] for x in self.results_score.values())
+        winner = temp[final_scores.index(max((final_scores)))]
+        
+        output += f"Overall winner name: {winner}\n"
+        for k,v in self.results_score.items():
+            output += f"{k} final score: {v[-1]}\n"
         # transcribe events
         output += "~~~~~\n"
 
@@ -108,5 +120,9 @@ class TwoPersonProblem(AbstractProblem):
                 bmvs = 'DEFECT'
             output += f"{i},{amvs},{bmvs},{ascr},{bscr}\n"
 
-        with open('this_will_be_more_descript_later.txt', 'w') as file:
+        file_name = str()
+        folder_name = 'results' + '/'
+        file_name += f"two_person_{self._pa._name}_{self._pb._name}_{self._iters}.txt"
+
+        with open(folder_name + file_name, 'w') as file:
             file.write(output)
