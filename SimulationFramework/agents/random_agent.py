@@ -1,4 +1,4 @@
-from abstract_agent import AbstractAgent, Decision
+from agents.abstract_agent import AbstractAgent, Decision
 import random
 
 class RandomAgent(AbstractAgent):
@@ -11,11 +11,5 @@ class RandomAgent(AbstractAgent):
         object.__setattr__(self,'choices',(Decision.COOPERATE, Decision.DEFECT))
         random.seed(seed)
 
-    def __setattr__(self, *args):
-        raise TypeError("Cannot modify immutable object")
-    
-    def __delattr__(self, *args):
-        raise TypeError("Cannot delete attributes")
-
-    def decide(self):
+    def decide(self, lore):
         return random.choice(self.choices)

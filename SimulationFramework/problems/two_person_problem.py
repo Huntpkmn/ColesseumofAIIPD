@@ -1,5 +1,5 @@
-from SimulationFramework.problems.abstract_problem import AbstractProblem
-from SimulationFramework.agents.abstract_agent import AbstractAgent, Decision
+from problems.abstract_problem import AbstractProblem
+from agents.abstract_agent import AbstractAgent, Decision
 class TwoPersonProblem(AbstractProblem):
 
     def __init__(self, iterations, dual_coop_reward, condemn_reward, dual_condemn_reward):
@@ -29,6 +29,9 @@ class TwoPersonProblem(AbstractProblem):
         for _ in range(self._iters):
             choice_a = self._pa.decide(lore)
             choice_b = self._pb.decide(lore)
+
+            change_A = 0
+            change_B = 0
 
             win_index = 0
             lose_index = 1
@@ -95,6 +98,14 @@ class TwoPersonProblem(AbstractProblem):
         output += "round,a_move,b_move,a_score,b_score\n"
 
         for i, (amvs, bmvs, ascr, bscr) in enumerate(zip(a_moves, b_moves, a_score, b_score)):
+            if amvs == Decision.COOPERATE:
+                amvs = 'COOPERATE'
+            else:
+                amvs = 'DEFECT'
+            if bmvs == Decision.COOPERATE:
+                bmvs = 'COOPERATE'
+            else:
+                bmvs = 'DEFECT'
             output += f"{i},{amvs},{bmvs},{ascr},{bscr}\n"
 
         with open('this_will_be_more_descript_later.txt', 'w') as file:
