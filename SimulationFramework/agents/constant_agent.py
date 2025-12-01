@@ -1,4 +1,4 @@
-from abstract_agent import AbstractAgent
+from agents.abstract_agent import AbstractAgent
 from enums.choices import DecisionEnum
 
 class ConstantAgent(AbstractAgent):
@@ -24,4 +24,9 @@ class ConstantAgent(AbstractAgent):
         self._behav = behaviour
 
     def decide(self, lore):
+        """
+        Return agents action for this turn.
+        
+        :param lore: Unused
+        """
         return self._behav

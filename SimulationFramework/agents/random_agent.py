@@ -1,5 +1,5 @@
 import random
-from abstract_agent import AbstractAgent
+from agents.abstract_agent import AbstractAgent
 from enums.choices import DecisionEnum
 
 class RandomAgent(AbstractAgent):

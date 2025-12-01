@@ -10,6 +10,7 @@ class AbstractProblem(ABC):
         self._condemn_r = condemn_reward
         self._dual_condemn_r = dual_condemn_reward
         self.added_participants = False
+        self.completed_experiment = False
         for score in (self._condemn_r, self._dual_condemn_r, self._dual_coop_r):
             if len(score) != 2:
                 raise ValueError(f"Problem reward {score} must be in form (int, int)")
@@ -26,7 +27,7 @@ class AbstractProblem(ABC):
         if self.added_participants == False:
             raise ValueError("You must implement and use 'add_participants()' before running an experiment!")
 
-    def export_to_txt():
+    def export_to_txt(self):
         """
         The problem should record what happens step by step,
         use this method to turn that play-by-play into a txt file export
