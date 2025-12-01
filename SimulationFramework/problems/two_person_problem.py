@@ -23,8 +23,8 @@ class TwoPersonProblem(AbstractProblem):
         if self.added_participants == False:
             raise ValueError("You must add participants using 'add_participants()'")
 
-        history_a = DescisionTranscript()
-        history_b = DescisionTranscript()
+        history_a = self._pa.history
+        history_b = self._pb.history
 
         for _ in range(self._iters):
             # Give each agent the history of the other agent.
