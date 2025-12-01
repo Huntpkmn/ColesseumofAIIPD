@@ -1,5 +1,6 @@
-from agents.abstract_agent import AbstractAgent, Decision
 import random
+from abstract_agent import AbstractAgent
+from enums.choices import DecisionEnum
 
 class RandomAgent(AbstractAgent):
     """
@@ -8,7 +9,7 @@ class RandomAgent(AbstractAgent):
 
     def __init__(self, name, seed=42):
         super().__init__(name)
-        object.__setattr__(self,'choices',(Decision.COOPERATE, Decision.DEFECT))
+        object.__setattr__(self,'choices',(DecisionEnum.COOPERATE, DecisionEnum.DEFECT))
         random.seed(seed)
 
     def decide(self, lore):
