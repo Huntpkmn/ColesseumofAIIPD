@@ -1,0 +1,8 @@
+# This folder only will have your immediate result outputs.
+SimulationFramework/results
+
+# Ignore the precompiled python files.
+SimulationFramework/*/__pycache__
+
+# Ignore the virtual environment.
+.venv
