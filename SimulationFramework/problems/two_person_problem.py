@@ -17,6 +17,12 @@ class TwoPersonProblem(AbstractProblem):
         partnerB.add_problem(self)
         self.added_participants = True
     
+    def get_participants(self):
+        return [self._pa, self._pb]
+
+    def get_other_participants(self, name):
+        return self._pb if self._pa.name == name else self._pa
+    
     def calculate_point(self, choice_a, choice_b):
         win_index = 0
         lose_index = 1

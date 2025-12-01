@@ -47,8 +47,7 @@ class MiniMax(AbstractAgent):
             return [current_state[0][self._name], ""]
         v = -math.inf
         for a in self.choices:
-            current_state
-            v2, a2 = self.min_value(, depth + 1, alpha, beta)
+            v2, a2 = self.min_value(current_state, a, depth + 1, alpha, beta)
             # print(v2,a2)
             if v2 > v:
 
@@ -62,7 +61,7 @@ class MiniMax(AbstractAgent):
 
 
 
-    def min_value(self, current_state, depth: int,
+    def min_value(self, current_state, action, depth: int,
                   alpha: float, beta: float):
         """
         Recursive function to find the min of possible successors.
@@ -75,7 +74,7 @@ class MiniMax(AbstractAgent):
         :return: Action to take in the current game state.
         """
         if depth > self.depth_limit:
-            return [game.utility(current_state, self.player), ""]
+            return [current_state[0][self._name], ""]
         v = math.inf
         for a in self.choices:
             v2, a2 = self.max_value(self.calculate_point(current_state, a), depth + 1, alpha, beta)

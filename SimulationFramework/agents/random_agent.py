@@ -11,5 +11,5 @@ class RandomAgent(AbstractAgent):
         object.__setattr__(self,'choices',(Decision.COOPERATE, Decision.DEFECT))
         random.seed(seed)
 
-    def decide(self, lore):
+    def decide(self, lore, points):
         return random.choice(self.choices)

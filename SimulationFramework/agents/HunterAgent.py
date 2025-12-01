@@ -23,7 +23,7 @@ class HunterAgent(AbstractAgent):
         self.lastmove = Decision.COOPERATE
         self.state = ""
 
-    def decide(self, lore):
+    def decide(self, lore, points):
 
         old_state = lore[list(set(lore.keys())-set([self._name]))[0]]
 
@@ -46,6 +46,7 @@ class HunterAgent(AbstractAgent):
             self.lastmove = Decision.DEFECT
 
         elif len(old_state) == 5:
+            self.lastmove = Decision.DEFECT
             if self.othercooperates > 2:
                 self.state = "Steal"
             elif self.doublecooperates == 2:
