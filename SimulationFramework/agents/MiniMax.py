@@ -16,7 +16,7 @@ class MiniMax(AbstractAgent):
 
     def decide(self, lore):
         old_state = lore[list(set(lore.keys())-set([self._name]))[0]]
-        return self.minimax_search(old_state)
+        return self.minimax_search(lore)
 
 
     def minimax_search(self,current_state) -> str:
@@ -44,10 +44,11 @@ class MiniMax(AbstractAgent):
         :return: Action to take in the current game state.
         """
         if depth > self.depth_limit:
-            return [game.utility(current_state, self.player), ""]
+            return [current_state[0][self._name], ""]
         v = -math.inf
         for a in self.choices:
-            v2, a2 = self.min_value(self.problem.calculate_point(current_state, a), depth + 1, alpha, beta)
+            current_state
+            v2, a2 = self.min_value(, depth + 1, alpha, beta)
             # print(v2,a2)
             if v2 > v:
 

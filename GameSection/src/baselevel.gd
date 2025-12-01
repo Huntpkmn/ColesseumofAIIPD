@@ -74,24 +74,28 @@ func game_loop():
 		var xi = 0
 		var yi = 0
 		while xi < len(players):
-			while yi+(len(players)-xi) < len(players):
-				if actions[xi] == 0 and actions[yi] == 0:
+			while yi +(len(players)-xi)< len(players):
+				var a1 = actions[xi][yi]
+				var a2 = actions[yi][xi]
+				if a1 == 0 and a2 == 0:
 					points[players[xi]] += 1
 					points[players[yi]] += 1
 					pass
-				elif actions[xi] == 1 and actions[yi] == 0:
+				elif a1 == 1 and a2 == 0:
 					points[players[xi]] += 0
 					points[players[yi]] += 5
 					pass
-				elif actions[xi] == 0 and actions[yi] == 1:
+				elif a1 == 0 and a2 == 1:
 					points[players[xi]] += 5
 					points[players[yi]] += 0
 					pass
-				elif actions[xi] == 1 and actions[yi] == 1:
+				elif a1 == 1 and a2 == 1:
 					points[players[xi]] += 3
 					points[players[yi]] += 3
+				print(xi," , ",yi)
 				yi+=1
 			xi+=1
+	
 		update_score_board(points)
 
 func update_score_board(new_points):
@@ -105,6 +109,18 @@ func ask_decision():
 	$PlayerUI/PlayerUI/Cooperate.show()
 	$PlayerUI/PlayerUI/Defect.show()
 	return await answer
+
+func ask_set_arrow(originating_player: Node2D, target_player :Node2D, decision):
+	var arrow :TextureRect= preload("res://src/arrow.tscn").instantiate()
+	arrow.global_position = originating_player.global_position
+	arrow.rotation = originating_player.global_position.angle_to_point(target_player.global_position)
+	arrow.size.x = originating_player.global_position.distance_to(target_player.global_position)
+	if decision == 0:
+		arrow.modulate = Color(1.0, 0.0, 0.0, 0.612)
+	else:
+		arrow.modulate = Color(0.417, 0.604, 0.0, 0.612)
+	$Arrows.add_child(arrow)
+	
 
 
 

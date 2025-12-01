@@ -16,12 +16,13 @@ func set_up():
 	color = Color8(r,g,b)
 	$Character/ColorBox.texture.get_gradient().set_color(0,color)
 
-func get_action(players)->int:
+func get_action(players)->Array:
 	var items = []
 	for i in range(len(players)):
 		var item = 0
 		if players[i] == self:
 			item = 1
+			items.append(item)
 			continue
 		item = await get_tree().get_first_node_in_group("main").ask_decision()
 		#CHange color here as well
@@ -32,6 +33,7 @@ func get_action(players)->int:
 			$Character/Decision.color = Color(0.417, 0.604, 0.0, 0.612)
 		$Character/Decision.show()
 		items.append(item)
+		get_tree().get_first_node_in_group("main").ask_set_arrow(self, players[i], item)
 	return items
 
 

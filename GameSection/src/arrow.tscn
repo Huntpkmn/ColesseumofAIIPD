@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy0dveqof4ffj"]
+
+[sub_resource type="Gradient" id="Gradient_k8he5"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4e7a3"]
+gradient = SubResource("Gradient_k8he5")
+
+[node name="TextureRect" type="TextureRect"]
+offset_top = -10.0
+offset_right = 256.0
+offset_bottom = 8.0
+texture = SubResource("GradientTexture1D_4e7a3")

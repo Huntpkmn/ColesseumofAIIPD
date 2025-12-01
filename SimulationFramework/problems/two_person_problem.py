@@ -13,7 +13,33 @@ class TwoPersonProblem(AbstractProblem):
             raise ValueError("Agents must inherit from class AbstractAgent")
         self._pa = partnerA
         self._pb = partnerB
+        partnerA.add_problem(self)
+        partnerB.add_problem(self)
         self.added_participants = True
+    
+    def calculate_point(self, choice_a, choice_b):
+        win_index = 0
+        lose_index = 1
+        change_A = 0
+        change_B = 0
+        if choice_a == Decision.DEFECT and choice_b == Decision.DEFECT:
+            # Both tried to condemn the other. Bad ending.
+            change_A = self._dual_condemn_r[win_index]
+            change_B = self._dual_condemn_r[lose_index]
+        elif choice_a == Decision.COOPERATE and choice_b == Decision.COOPERATE:
+            # Both help eachother. Good ending :)
+            change_A = self._dual_coop_r[win_index]
+            change_B = self._dual_coop_r[lose_index]
+        elif choice_a == Decision.DEFECT and choice_b == Decision.COOPERATE:
+            # A kills B
+            change_A = self._condemn_r[win_index]
+            change_B = self._condemn_r[lose_index]
+        elif choice_a == Decision.COOPERATE and choice_b == Decision.DEFECT:
+            # B kills A
+            change_A = self._condemn_r[lose_index]
+            change_B = self._condemn_r[win_index]
+        return [change_A, change_B]
+        
         
     def run(self):
 

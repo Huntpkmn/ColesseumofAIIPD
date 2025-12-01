@@ -24,7 +24,7 @@ class HunterAgent(AbstractAgent):
         self.state = ""
 
     def decide(self, lore):
-        print(lore)
+
         old_state = lore[list(set(lore.keys())-set([self._name]))[0]]
 
         if len(old_state) == 0:
