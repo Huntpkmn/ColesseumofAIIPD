@@ -10,9 +10,9 @@ class TitForTatAgent(AbstractAgent):
     def get_history(self):
         return super().get_history()
 
-    def decide(self, other_agents_transcript: DescisionTranscript):
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
         if self.first_move:
             self.first_move = False
             return DecisionEnum.COOPERATE
         else:
-            return other_agents_transcript.get_last_choice()
+            return opponent_choices.get_last_choice()

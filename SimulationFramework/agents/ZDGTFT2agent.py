@@ -7,13 +7,13 @@ class ZDGTFT2(AbstractAgent):
     def __init__(self, name):
         super().__init__(name)
 
-    def decide(self, other_agents_transcript: DescisionTranscript):
-        size = len(other_agents_transcript.get_choice_history())
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
+        size = len(opponent_choices.get_choice_history())
         
         if size == 0:
             return DecisionEnum.COOPERATE
         else:
-            last_move = other_agents_transcript.get_last_choice()
+            last_move = opponent_choices.get_last_choice()
             if last_move == DecisionEnum.COOPERATE:
                 return DecisionEnum.COOPERATE
             else:

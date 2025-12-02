@@ -1,5 +1,5 @@
 from agents.abstract_agent import AbstractAgent
-from enums.choices import DecisionEnum
+from enums.choices import DecisionEnum, DescisionTranscript
 
 class ConstantAgent(AbstractAgent):
     """
@@ -23,10 +23,10 @@ class ConstantAgent(AbstractAgent):
             raise ValueError("Agent decisions must be configured using descision enumeration!")
         self._behav = behaviour
 
-    def decide(self, lore):
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
         """
         Return agents action for this turn.
-        
-        :param lore: Unused
+
+        :param opponent_choices: Ignored 
         """
         return self._behav

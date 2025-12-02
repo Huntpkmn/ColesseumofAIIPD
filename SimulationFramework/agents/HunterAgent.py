@@ -1,5 +1,5 @@
 from agents.abstract_agent import AbstractAgent
-from enums.choices import DecisionEnum
+from enums.choices import DecisionEnum, DescisionTranscript
 import random
 
 class HunterAgent(AbstractAgent):
@@ -25,9 +25,9 @@ class HunterAgent(AbstractAgent):
         self.lastmove = DecisionEnum.COOPERATE
         self.state = ""
 
-    def decide(self, lore):
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
 
-        old_state = lore.get_choice_history()
+        old_state = opponent_choices.get_choice_history()
 
         if len(old_state) == 0:
             return DecisionEnum.COOPERATE
