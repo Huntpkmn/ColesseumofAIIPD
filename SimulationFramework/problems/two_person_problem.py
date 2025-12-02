@@ -8,7 +8,8 @@ class TwoPersonProblem(AbstractProblem):
         super().__init__(iterations, dual_coop_reward, condemn_reward, dual_condemn_reward)
         # Score tuple | 0 = winner add value , 1 = loser score add
         self.added_participants = False
-        self.completed_experiment = False
+        self.ran_experiment = False
+        self.agents_finished_above_zero = True
         
     def add_participants(self, partnerA:AbstractAgent, partnerB:AbstractAgent):
         if not isinstance(partnerA, AbstractAgent) or not isinstance(partnerB, AbstractAgent):
@@ -56,17 +57,19 @@ class TwoPersonProblem(AbstractProblem):
             else:
                 raise ValueError(f"Agent choices must be made using DecisionEnum enumeration")
             
-            history_a.score_update(change_A)
-            history_b.score_update(change_B)
+            # checks if any agents died.
+            if not history_a.score_update(change_A) and history_b.score_update(change_B):
+                self.agents_finished_above_zero = False
+                break
 
         # Experiment ended, store events in class.
         self.results_a = history_a
         self.results_b = history_b
-        self.completed_experiment = True
+        self.ran_experiment = True
     
     def export_to_txt(self):
 
-        if self.completed_experiment == False:
+        if self.ran_experiment == False:
             raise ValueError("Must complete an experiment before attemping export!")
 
         output = str()
@@ -91,6 +94,8 @@ class TwoPersonProblem(AbstractProblem):
             winner = self._pb._name
         else:
             winner = "STALEMATE"
+
+        output += f"Game Completed: {self.agents_finished_above_zero}\n"
         
         output += f"Winner: {winner}\n"
         output += f"{self._pa._name} final score: {self.results_a.get_final_score()}\n"
