@@ -46,7 +46,7 @@ class DescisionTranscript():
         last += change
         self.scores.append(last)
         self._ledger_check_similar()
-        if last > 0:
+        if last >= 0:
              return True
         else:
              return False
@@ -57,7 +57,8 @@ class DescisionTranscript():
     
     def get_final_score(self):
         self._ledger_check_same()
-        return self.scores[-1]
+        
+        return self.scores[-1] if not(self.is_empty()) else 0
     
     def get_choice_history(self):
         self._ledger_check_same()

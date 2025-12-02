@@ -15,8 +15,35 @@ class TwoPersonProblem(AbstractProblem):
         if not isinstance(partnerA, AbstractAgent) or not isinstance(partnerB, AbstractAgent):
             raise ValueError("Agents must inherit from class AbstractAgent")
         self._pa = partnerA
+        self._pa.problem = self
         self._pb = partnerB
+        self._pb.problem = self
         self.added_participants = True
+
+    def calculate_score(self,choice_a, choice_b):
+        change_A = 0
+        change_B = 0
+        win_index = 0
+        lose_index = 1
+        if choice_a == DecisionEnum.DEFECT and choice_b == DecisionEnum.DEFECT:
+            # Both tried to condemn the other. Bad ending.
+            change_A = self._dual_condemn_r[win_index]
+            change_B = self._dual_condemn_r[lose_index]
+        elif choice_a == DecisionEnum.COOPERATE and choice_b == DecisionEnum.COOPERATE:
+            # Both help eachother. Good ending :)
+            change_A = self._dual_coop_r[win_index]
+            change_B = self._dual_coop_r[lose_index]
+        elif choice_a == DecisionEnum.DEFECT and choice_b == DecisionEnum.COOPERATE:
+            # A kills B
+            change_A = self._condemn_r[win_index]
+            change_B = self._condemn_r[lose_index]
+        elif choice_a == DecisionEnum.COOPERATE and choice_b == DecisionEnum.DEFECT:
+            # B kills A
+            change_A = self._condemn_r[lose_index]
+            change_B = self._condemn_r[win_index]
+        else:
+            raise ValueError(f"Agent choices must be made using DecisionEnum enumeration")
+        return (change_A, change_B)
         
     def run(self):
 
@@ -34,31 +61,11 @@ class TwoPersonProblem(AbstractProblem):
             history_a.record_choice(choice_a)
             history_b.record_choice(choice_b)
 
-            change_A = 0
-            change_B = 0
-            win_index = 0
-            lose_index = 1
-            if choice_a == DecisionEnum.DEFECT and choice_b == DecisionEnum.DEFECT:
-                # Both tried to condemn the other. Bad ending.
-                change_A = self._dual_condemn_r[win_index]
-                change_B = self._dual_condemn_r[lose_index]
-            elif choice_a == DecisionEnum.COOPERATE and choice_b == DecisionEnum.COOPERATE:
-                # Both help eachother. Good ending :)
-                change_A = self._dual_coop_r[win_index]
-                change_B = self._dual_coop_r[lose_index]
-            elif choice_a == DecisionEnum.DEFECT and choice_b == DecisionEnum.COOPERATE:
-                # A kills B
-                change_A = self._condemn_r[win_index]
-                change_B = self._condemn_r[lose_index]
-            elif choice_a == DecisionEnum.COOPERATE and choice_b == DecisionEnum.DEFECT:
-                # B kills A
-                change_A = self._condemn_r[lose_index]
-                change_B = self._condemn_r[win_index]
-            else:
-                raise ValueError(f"Agent choices must be made using DecisionEnum enumeration")
+            change_A, change_B = self.calculate_score(choice_a, choice_b)
             
             # checks if any agents died.
-            if not history_a.score_update(change_A) and history_b.score_update(change_B):
+            answer_1, answer_2= history_a.score_update(change_A), history_b.score_update(change_B)
+            if not answer_1 and answer_2:
                 self.agents_finished_above_zero = False
                 break
 

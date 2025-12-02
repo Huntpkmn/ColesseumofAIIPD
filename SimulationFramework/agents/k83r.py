@@ -1,6 +1,6 @@
 from agents.abstract_agent import AbstractAgent
 from enums.choices import DecisionEnum
-from enums.choices import DescisionTranscript
+
 
 import random
 
