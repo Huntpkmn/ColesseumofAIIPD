@@ -1,5 +1,5 @@
 from agents.abstract_agent import AbstractAgent
-from enums.choices import DecisionEnum
+from enums.choices import DecisionEnum, DescisionTranscript
 
 
 import random
@@ -14,11 +14,10 @@ class K83R(AbstractAgent):
 
     def __init__(self, name, seed=42):
         super().__init__(name)
-        object.__setattr__(self,'choices',(DecisionEnum.COOPERATE, DecisionEnum.DEFECT))
         random.seed(seed)
 
-    def decide(self, history):
-        old_state = history.get_choice_history()
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
+        old_state = opponent_choices.get_choice_history()
         if len(old_state) < 5:
             return DecisionEnum.DEFECT
         else:

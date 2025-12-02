@@ -1,6 +1,6 @@
 import random
 from agents.abstract_agent import AbstractAgent
-from enums.choices import DecisionEnum
+from enums.choices import DecisionEnum, DescisionTranscript
 
 class RandomAgent(AbstractAgent):
     """
@@ -12,5 +12,5 @@ class RandomAgent(AbstractAgent):
         object.__setattr__(self,'choices',(DecisionEnum.COOPERATE, DecisionEnum.DEFECT))
         random.seed(seed)
 
-    def decide(self, lore):
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
         return random.choice(self.choices)

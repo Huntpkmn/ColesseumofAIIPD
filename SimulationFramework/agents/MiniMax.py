@@ -1,5 +1,5 @@
 from agents.abstract_agent import AbstractAgent
-from enums.choices import DecisionEnum
+from enums.choices import DecisionEnum, DescisionTranscript
 import random
 import math
 
@@ -16,7 +16,7 @@ class MiniMax(AbstractAgent):
         self.depth_limit = depth_limit
         
 
-    def decide(self, lore):
+    def decide(self, opponent_choices: DescisionTranscript) -> DecisionEnum:
         points = self.history.get_final_score()
         
         return self.minimax_search(points)
