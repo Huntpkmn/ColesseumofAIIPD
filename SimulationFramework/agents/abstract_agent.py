@@ -7,6 +7,9 @@ class AbstractAgent(ABC):
     def __init__(self, name:str):
         """
         This method enforces the collection of the minimum information needed for simulation to run.
+
+        :param name: How this instance will be identified in simulation.
+        :type name: str
         """
         self._name = name
         self.problem = None
@@ -29,6 +32,9 @@ class AbstractAgent(ABC):
         IE an agent can calulate future scores using the same math the problem is using to generate score changes.
 
         ## Most agents will not need to use this.
+
+        :param problem: Should be given 'self' from problem this agent belongs to.
+        :type problem: AbstractProblem
         """
         self.problem = problem
 

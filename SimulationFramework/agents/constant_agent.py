@@ -9,7 +9,7 @@ class ConstantAgent(AbstractAgent):
 
     def __init__(self, name: str, behaviour: DecisionEnum):
         """
-        This class need to be configured for its constant behvaiour.
+        This class needs to be configured for its constant behvaiour.
         
         :param self: This class.
         :param name: Identifier for this class. Used during simulation and transcription generation.
