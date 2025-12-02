@@ -106,6 +106,8 @@ alignment = 1
 position = Vector2(577, 314)
 zoom = Vector2(0.6, 0.6)
 
+[node name="Arrows" type="Node2D" parent="." groups=["Arrows"]]
+
 [node name="OverallScore" type="CanvasLayer" parent="." groups=["ScoreUI"]]
 layer = 3
 
