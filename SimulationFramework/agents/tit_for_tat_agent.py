@@ -7,6 +7,9 @@ class TitForTatAgent(AbstractAgent):
         super().__init__(name)
         self.first_move = True
 
+    def get_history(self):
+        return super().get_history()
+
     def decide(self, other_agents_transcript: DescisionTranscript):
         if self.first_move:
             self.first_move = False
