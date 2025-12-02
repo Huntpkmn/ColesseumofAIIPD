@@ -17,6 +17,13 @@ class AbstractProblem(ABC):
             for i in score:
                 if not isinstance(i, int):
                     raise ValueError(f"Problem reward can only contain int, not {type(i)}")
+                
+    def calculate_score(self):
+        """
+        You must implement the logic for score adjustments in this method.
+        Some agents may want to use this information.
+        """
+        pass
 
     def add_participants(self):
         "Use this method to add some agents to this problem."

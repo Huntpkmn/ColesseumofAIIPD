@@ -20,7 +20,7 @@ class TwoPersonProblem(AbstractProblem):
         self._pb.problem = self
         self.added_participants = True
 
-    def calculate_score(self,choice_a, choice_b):
+    def calculate_score(self,choice_a, choice_b) -> tuple[int, int]:
         change_A = 0
         change_B = 0
         win_index = 0
