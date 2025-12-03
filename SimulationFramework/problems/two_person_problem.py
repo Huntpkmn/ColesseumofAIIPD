@@ -2,6 +2,8 @@ from problems.abstract_problem import AbstractProblem
 from agents.abstract_agent import AbstractAgent
 from enums.choices import DecisionEnum, DescisionTranscript
 from pathlib import Path
+import os
+
 class TwoPersonProblem(AbstractProblem):
 
     def __init__(self, iterations, dual_coop_reward, condemn_reward, dual_condemn_reward):
@@ -119,6 +121,9 @@ class TwoPersonProblem(AbstractProblem):
 
         for i, (amvs, bmvs, ascr, bscr) in enumerate(zip(a_moves, b_moves, a_score, b_score)):
             output += f"{i},{amvs},{bmvs},{ascr},{bscr}\n"
+
+        # Create the results folder if it doens't already. 
+        os.makedirs('results', exist_ok=True)
 
         file_name = str()
         folder_name = 'results' + '/'
