@@ -3,6 +3,7 @@ extends Node2D
 var strategy : AIStrategy
 var ai_name := "Null"
 var color = Color8(0,0,0)
+var actions = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
