@@ -75,6 +75,10 @@ class TwoPersonProblem(AbstractProblem):
         self.results_a = history_a
         self.results_b = history_b
         self.ran_experiment = True
+
+        a_final, b_final = history_a.get_final_score(), history_b.get_final_score()
+        winner = "STALEMATE" if a_final == b_final else self._pa._name if a_final > b_final else self._pb._name
+        return (winner, a_final, b_final)
     
     def export_to_txt(self):
 
@@ -140,5 +144,3 @@ class TwoPersonProblem(AbstractProblem):
             file.write(output)
 
         print(f"\nCreated file: {path}")
-
-        return (winner, a_score, b_score)

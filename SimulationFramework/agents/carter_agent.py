@@ -39,13 +39,17 @@ class CartersAgent(AbstractAgent):
                 if other[0] == DecisionEnum.COOPERATE and other[1] == DecisionEnum.DEFECT:
                     # It looks like you went out of your way to defect after I tried to cooperate. >:(
                     self.feels = self.Mood.HATRED
+                    return DecisionEnum.DEFECT
                 elif other[0] == DecisionEnum.DEFECT and other[1] == DecisionEnum.COOPERATE:
                     # You might try to take advantage of my kindness.
                     self.feels = self.Mood.INDIFFERENT
+                    return opponent_choices.get_last_choice()
                 elif other[0] == DecisionEnum.COOPERATE and other[1] == DecisionEnum.COOPERATE:
                     self.feels = self.Mood.FRIENDSHIP
+                    return DecisionEnum.COOPERATE
                 else:
                     self.feels = self.Mood.HATRED
+                    return DecisionEnum.DEFECT
         else:
             if self.feels == self.Mood.HATRED:
                 return DecisionEnum.DEFECT
