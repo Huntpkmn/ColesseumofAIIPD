@@ -43,7 +43,7 @@ def create_round_robin_matchups(all_agents: list[type[AbstractAgent]]) -> Genera
     :param all_agents: The list containing the type() of each agent found in the file heirarchy.
     :type all_agents: list[type[AbstractAgent]]
     :return: A reference to a generator yielding every combination of agent types.
-    :rtype: Generator[tuple[type[AbstractAgent], type[AbstractAgent]]]]
+    :rtype: Generator[tuple[type[AbstractAgent], type[AbstractAgent]], None, None]]
     """
     return itertools.combinations(all_agents, 2)
 
@@ -51,14 +51,14 @@ def run_experiments(
         matchups: Generator[tuple[type[AbstractAgent], type[AbstractAgent]], None, None],
         scores: tuple[tuple[int, int], tuple[int, int], tuple[int, int]],
         i: int = 10
-                    ):
+        ) -> dict[tuple[str, str]: tuple[str, int, int]]:
     """
     This method runs a two_person_problem() for every combination of agents found and retuns the collection of results.
     
     :param matchups: Reference to generator producing Agent type() combinations.
     :type matchups: Generator[tuple[type[AbstractAgent], type[AbstractAgent]]]
-    :return: A list of all of the returned victors and scores of the run experiments.
-    :rtype: list[tuple[str, int, int]]
+    :return: The results of the experiment keyed by a tuple of the participants names.
+    :rtype: dict[tuple[str, str]: tuple[str, int, int]]
     """
     results = {}
     for type_a, type_b in matchups:
